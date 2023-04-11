@@ -153,4 +153,21 @@ public class MemoRepositoryTests {
                 memo -> System.out.println(memo)
         );
     }
+
+    @Test
+    public void testGetObjectWithQuery(){
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("mno").ascending());
+        Page<Object[]> result = memoRepository.getListWithQueryObject(10L, pageable);
+        result.get().forEach(
+                obj -> System.out.println(obj[0] + "\t" + obj[1] + "\t" + obj[2])
+        );
+    }
+
+    @Test
+    public void getNativeResult(){
+        List<Object[]> list = memoRepository.getNativeResult();
+        for (Object[] obj : list){
+            System.out.println(obj[0] + "\t" + obj[1]);
+        }
+    }
 }
